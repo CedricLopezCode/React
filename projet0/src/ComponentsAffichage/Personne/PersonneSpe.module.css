@@ -1,0 +1,13 @@
+.monTitreClasse{
+    background-color: green;
+    color: rgb(0, 248, 165);
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.monTitreState{
+    background-color: darkslategray;
+    color: white;
+    border-radius: 20px;
+    padding: 5px;
+}

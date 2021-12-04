@@ -1,6 +1,7 @@
 
 import PersonneFonction from "./ComponentsAffichage/Personne/PersonneFonction";
 import PersonneClasse from "./ComponentsAffichage/Personne/PersonneClasse";
+import PersonneState from "./ComponentsAffichage/Personne/PersonneState";
 import HorlogeLive from "./ContainersClassState/Horloge/HorlogeLive";
 import "./App.css";
 
@@ -30,15 +31,27 @@ export default app;*/
 
 import React from 'react';
 class App extends React.Component {
+    state = {
+        personnes: [
+            {nom: "Cédric", age: 28, sexe: true},
+            {nom: "Céline", age: 19, sexe: false},
+            {nom: "Jean", age: 100, sexe: false},
+        ]
+    }
     render(){
         //return <h1>Class sans préciser Component dans l'import</h1>;
         return <>
             <HorlogeLive/>
-            <PersonneFonction nom="Cédric" age="28" sexe="Homme"/>
-            <PersonneFonction nom="Céline" age="19" sexe="Fille"/>
-            <PersonneFonction nom="Jean" age="100" sexe="Femme"/>
-            <PersonneClasse nom="Cédric" age="28" sexe="Homme"/>
+            <PersonneFonction nom = "Cédric" age = "28" sexe = "Homme"/>
+            <PersonneFonction nom = "Céline" age = "19" sexe = "Fille"/>
+            <PersonneFonction nom = "Jean" age = "100" sexe = "Femme"/>
+            <PersonneClasse nom = "Cédric" age = "28" sexe = "Homme"/>
+            <PersonneState nom = {this.state.personnes[0].nom} age = {this.state.personnes[0].age} sexe = {this.state.personnes[0].sexe}/>
+            <PersonneState nom = {this.state.personnes[1].nom} age = {this.state.personnes[1].age} sexe = {this.state.personnes[1].sexe}/>
+            <PersonneState nom = {this.state.personnes[2].nom} age = {this.state.personnes[2].age} sexe = {this.state.personnes[2].sexe}/>
+            <PersonneState {...this.state.personnes[0]}/> 
         </>;
+        //<PersonneState {...this.state.personnes[0]}/>  envoie TOUTES les propriétés
     }
 }
 export default App;

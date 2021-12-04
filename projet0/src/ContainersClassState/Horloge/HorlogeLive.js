@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import "/home/cmetroid/CDA/32_React/projet0/src/ComponentsAffichage/Personne/PersonneGeneral.css";
+import classes from "./HorlogeLive.module.css";
 
 class HorlogeLive extends Component{
     /*constructor(props){//facultatif
@@ -37,8 +39,8 @@ class HorlogeLive extends Component{
     render(){ // == affichage
         console.log("Composant affiché");
         return <>
-            <h2>Heure au moment du rafraichissement: {this.auChargement}</h2>
-            <h2>Heure en direct: ___________________ {this.state.date.toLocaleTimeString()}</h2>
+            <h2 className={classes.monTitre}>Heure au moment du rafraichissement: {this.auChargement}</h2>
+            <h2 className="monTitre">Heure en direct: ___________________ {this.state.date.toLocaleTimeString()}</h2>
             <h2>Compteur: _______________________ {this.state.compteur}</h2>
         </>;
     }
