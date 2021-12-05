@@ -1,0 +1,8 @@
+.policeTitre{
+    font-family: 'Sigmar One', cursive;
+}
+.policeTitre:hover{
+    color: orange !important;
+}
+
+/*"border border-dark p-2 m-2 text-white text-center bg-primary rounded"*/
