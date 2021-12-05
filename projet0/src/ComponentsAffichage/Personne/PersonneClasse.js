@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AgePersonne from "./AgePersonne/AgePersonne";
-import "./PersonneGeneral.css"; //impotes des classes générales
+import "./PersonneGeneral.css"; //importe des classes générales
 
 class PersonneClasse extends Component{
     /*constructor(props){ //ancienne méthode. Plus besoin du constructeur depuis ES7
@@ -37,7 +37,7 @@ class PersonneClasse extends Component{
         monStyle.fontStyle = "italic";
         return (
             <>
-                <h1 className="monTitre">Prénom: {this.props.nom}</h1>
+                <h2 className="monTitre">Prénom: {this.props.nom}</h2>
                 <AgePersonne age={this.props.age}/>
                 <div style={monStyle}>Sexe: {this.props.sexe}</div> 
             </>

@@ -1,6 +1,10 @@
 .monTitre{
-    background-color: blue;
+    background-color: darkslategray;
     color: aquamarine;
     border-radius: 15px;
-    padding: 10px;
+    padding: 5px;
+}
+
+.uneCard{
+    width: 20em;
 }

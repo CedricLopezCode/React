@@ -6,5 +6,4 @@ const agePersonne = (props) => {
     return <div>Age: {props.age} ans - ({annee-props.age})</div>;
 }
 
-
 export default agePersonne;
