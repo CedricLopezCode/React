@@ -1,28 +1,52 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
-import BoutonGenerique from './Components/boutonGenerique';
+import React, { Component } from 'react'; 
+import BoutonGenerique from './Components/Boutons/BoutonGenerique';
+import BoutonCor from './Components/Boutons/BoutonsCor';
+import MessageAlert from './Components/MessageAlert/MessageAlert';
 import TitrePage from './Components/TitrePage/TitrePage';
+import TableauLivres from './Containers/TableauLivres.js/TableauLivres';
 
 class App extends Component{
-  render() {
-    return <>
-      <div className="container">
-        <TitrePage>Page listants les livres de ma Bibliothèque</TitrePage>
-        <div>Liste livres</div>
-        <BoutonGenerique onClick={(event) => this.addLivreHandler(event, "add")}>Ajouter</BoutonGenerique>
-        <BoutonGenerique onClick={(event) => this.updateLivreHandler(event, "update")}>Modifier</BoutonGenerique>
-        <BoutonGenerique onClick={(event) => this.deleteLivreHandler(event, "delete")}>Supprimmer</BoutonGenerique>
-      </div>
-    </>;
-  }//fin render
+  state = {
+    modeAjout:false,
+    modeModif:false,
+    typeAlert: ""
+  }  
 
-  addLivreHandler = (event, action) => {console.log("Add" + action);}
-  updateLivreHandler = (event, action) => {console.log("update" + action);}
-  deleteLivreHandler = (event, action) => {console.log("delete" + action);}
+  render() {
+    //let textBouton = this.state.modeAjout ? "Fermer l'ajout" : "Ajouter";
+    return <div className="container">
+        <TitrePage>Page listants les livres de ma Bibliothèque</TitrePage>
+        {this.state.typeAlert !== "" && <MessageAlert typeAlert={this.state.typeAlert}/>}
+        <TableauLivres 
+          modeAjout={this.state.modeAjout} 
+          fermerFormAjout={this.changBoutonAjoutHandle} 
+          changFormModif={this.changBoutonModifHandle}
+          changAlert={this.changAlert}
+        />
+        <BoutonCor 
+          typeBtn="btn-success" 
+          largeur="w-100" 
+          clic={this.changBoutonAjoutHandle}
+        >{!this.state.modeAjout ? "Ajouter" : "Fermer l'ajout"}</BoutonCor>
+      </div>;
+  }//fin render
+  
+  changBoutonAjoutHandle = () => { //Ma méthode VS...
+    console.log("change bouton Ajout")
+    const changModeAjout = !this.state.modeAjout;
+    this.setState({modeAjout: changModeAjout});
+  }
+  changBoutonModifHandle = () => { //...VS la sienne
+    console.log("change bouton Modif")
+    this.setState((oldState, props) => {return {modeModif: !oldState.modeModif}});
+  }
+  changAlert = (typeAlert) => {
+    console.log("change alert")
+    this.setState((oldState, props) => {return {typeAlert: typeAlert}});
+    setTimeout(() =>  this.setState({typeAlert: ""}) , 5000);
+  }
 
 }//fin App
-/*ajouterLivre(){
-  console.log("Ajouter Livre cliqué");
-}*/
+
 
 export default App;

@@ -1,6 +1,7 @@
 import React from "react";
 
 const boutonGenerique = (props) => {
+    
     let styleBouton = "btn";
     switch (props.children) {
         case "Ajouter":
