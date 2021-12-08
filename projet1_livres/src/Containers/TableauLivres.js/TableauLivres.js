@@ -2,7 +2,11 @@
 import React, { Component } from 'react'; 
 import BoutonCor from '../../Components/Boutons/BoutonsCor';
 import FormulaireAjout from '../FormulaireAjout/FormulaireAjout';
+import FormAjoutFormik from '../FormulaireAjout/FormAjoutFormik';
+import FormAjoutFormikYup from '../FormulaireAjout/FormAjoutFormikYup';
 import FormulaireModif from '../FormulaireModif/FormulaireModif';
+import FormModifFormik from '../FormulaireModif/FormModifFormik';
+import FormModifFormikYup from '../FormulaireModif/FormModifFormikYup';
 import UnLivre from './UnLivre.js/unLivre';
 
 class TableauLivres extends Component{
@@ -38,7 +42,7 @@ class TableauLivres extends Component{
                                 if(livre.id === this.state.idLivreAModidier){
                                     return (
                                         <tr key={livre.id}>                                
-                                            <FormulaireModif 
+                                            <FormModifFormikYup 
                                                 id={livre.id} 
                                                 titre={livre.titre} 
                                                 auteur={livre.auteur} 
@@ -65,9 +69,11 @@ class TableauLivres extends Component{
                         }
                     </tbody>
                 </table>
-                {this.props.modeAjout && <FormulaireAjout validation={this.addLivreHandler}/>}
+                {this.props.modeAjout && <FormAjoutFormikYup validation={this.addLivreHandler}/>}
             </div>
         </>;
+                //FormulaireAjout ou FormAjoutFormik ou FormAjoutFormikYup
+                //FormulaireModif ou FormModifFormik ou FormModifFormikYup
     }//fin render
     addLivreHandler = (titre, auteur , nbPages) => {
         console.log("add démarré");
