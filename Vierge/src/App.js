@@ -6,6 +6,7 @@ class App extends Component{
   render(){
     return <div className="container">
       <Titre>Titre de la page</Titre>
+      <div>Bootsrap déjà inclus</div>
       <Bouton typeBtn="btn-primary" onClic={this.boutonClique} largeur="w-50">Texte Bouton</Bouton>
     </div>;
   }
