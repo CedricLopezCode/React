@@ -1,19 +1,29 @@
 import React, { Component } from 'react';
-import Titre from './Components/Titre/Titre';
-import Personnage from './Containers/Personnage/Personnage';
-import Armes from './Containers/Armes/Armes';
-import Bouton from './Components/Bouton/Bouton';
+import CreateurPersoAxios from './Containers/CreateurPersonnage/CreateurPersoAxios';
+import CreateurPersonnage from './Containers/CreateurPersonnage/CreateurPersonnage';
+import ListePersos from './Containers/ListePersos/ListePersos';
+
 
 class App extends Component{
+  
+  state = {
+    refresh: false,
+  }
+
   render(){
     return <div className="container">
-      <Titre>Créateur de Personnage</Titre>
-      <Personnage/>
-      <Armes/>
-      <Bouton typeBtn="btn-danger">Reinitialiser</Bouton>
-      <Bouton typeBtn="btn-success">Créer</Bouton>
+      <CreateurPersoAxios refresh={this.refreshHandle}/>
+      <ListePersos refresh={this.state.refresh}/>
+      <CreateurPersonnage />
     </div>;
   }
+
+  refreshHandle = () => {
+    this.setState((oldState) => {
+        return {refresh: !oldState.refresh};
+      });
+  }
+
 }
 
 export default App;
