@@ -17,7 +17,8 @@ class ListePersos extends Component{
     componentDidUpdate(oldProps, oldState){
         console.log("componentDidUpdate");
         if (oldProps.refresh !== this.props.refresh) {
-            this.recupData(); 
+            this.recupData();
+             
         }
     }
 
