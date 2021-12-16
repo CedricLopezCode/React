@@ -8,7 +8,7 @@ class PaysManager extends Component{
     state = {
         nombrePays: 0,
         refresh: false,
-        region : null,
+        regionSelec : null,
         numPage : 1,
     }
     
@@ -39,58 +39,59 @@ class PaysManager extends Component{
             <Bouton 
                 typeBtn="btn-info" 
                 clic={() => this.changRegionHandle("All")}
-                selected= {this.state.region === "All" || this.state.region == null}
+                selected= {this.state.regionSelec === "All" || this.state.regionSelec == null}
             >
                 Tous
             </Bouton>
             <Bouton 
                 typeBtn="btn-info" 
                 clic={() => this.changRegionHandle("Europe")}
-                selected= {this.state.region === "Europe"}
+                selected= {this.state.regionSelec === "Europe"}
             >
                 Europe
             </Bouton>
             <Bouton 
                 typeBtn="btn-info" 
                 clic={() => this.changRegionHandle("Africa")}
-                selected= {this.state.region === "Africa"}
+                selected= {this.state.regionSelec === "Africa"}
             >
                 Afrique
             </Bouton>
             <Bouton 
                 typeBtn="btn-info" 
                 clic={() => this.changRegionHandle("Asia")}
-                selected= {this.state.region === "Asia"}
+                selected= {this.state.regionSelec === "Asia"}
             >
                 Asie
             </Bouton>
             <Bouton 
                 typeBtn="btn-info" 
                 clic={() => this.changRegionHandle("Americas")}
-                selected= {this.state.region === "Americas"}
+                selected= {this.state.regionSelec === "Americas"}
             >
                 Amérique
             </Bouton>
             <Bouton 
                 typeBtn="btn-info" 
                 clic={() => this.changRegionHandle("Oceania")}
-                selected= {this.state.region === "Oceania"}
+                selected= {this.state.regionSelec === "Oceania"}
             >
                 Océanie
             </Bouton>
             <Bouton 
                 typeBtn="btn-info" 
                 clic={() => this.changRegionHandle("Antarctic")}
-                selected= {this.state.region === "Antarctic"}
+                selected= {this.state.regionSelec === "Antarctic"}
             >
                 Antarctique
             </Bouton>
             <span>Nombre de Pays: <span className="badge bg-success">{this.state.nombrePays}</span></span>
             <LesPays 
                 majNbPays={this.majNbPays} 
-                region={this.state.region}
+                regionSelec={this.state.regionSelec}
                 numPage= {this.state.numPage}
                 refresh={this.state.refresh}
+                {...this.props}
             />
             <div>{pagination}</div>
         </div>;
@@ -100,10 +101,10 @@ class PaysManager extends Component{
         console.log("change Region");
         this.refreshHandle();
         this.setState({
-            region: regionSelec,
+            regionSelec: regionSelec,
             numPage : 1
         });
-        console.log(this.state.region);
+        console.log(this.state.regionSelec);
     }
     boutonClique = () => {
         console.log("Bouton cliqué");
@@ -115,10 +116,10 @@ class PaysManager extends Component{
         this.setState({numPage: numPage});
     }
     refreshHandle = () => {
-        this.setState((oldState) => {
-            return {refresh: !oldState.refresh};
-          });
-      }
+    this.setState((oldState) => {
+        return {refresh: !oldState.refresh};
+        });
+    }
 }//fin PaysManager
 
 export default PaysManager;

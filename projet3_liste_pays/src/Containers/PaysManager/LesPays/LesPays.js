@@ -19,8 +19,8 @@ class LesPays extends Component{
     componentDidUpdate(oldProps, oldState){
         console.log("componentDidUpdate");
         if (oldProps.refresh !== this.props.refresh) {
-            this.recupData(this.props.region);
-            console.log("componentDidUpdate");
+            this.recupData(this.props.regionSelec);
+            console.log("componentDidUpdate ok");
         }
     }
 
@@ -34,7 +34,7 @@ class LesPays extends Component{
             fin = (this.props.numPage * 10);
             listePaysReduite = this.state.listePays.slice(debut, fin);
             listePays = listePaysReduite.map(cePays => { 
-                return <UnPays key={cePays.name} {...cePays}/>
+                return <UnPays key={cePays.name} {...cePays} {...this.props}/> //les props pour avoir le match donc l'url
             })
         }
         
@@ -48,26 +48,31 @@ class LesPays extends Component{
         </>;
     }//fin render
 
-    recupData = (region) => {
+    recupData = (regionSelec) => {
         this.setState({loading: true});
 
         let url = "https://restcountries.com/v3.1/";
-        if(region == null || region === "All"){url += "all";}
-        else{url += `region/${region}`;}
+        if(regionSelec == null || regionSelec === "All"){url += "all";}
+        else{url += `region/${regionSelec}`;}
         //region != "null" ? url += `region/${region}` : url += "all";
-        console.log("region: " + region);
-        console.log("majListePays");
+        console.log("majListePays de la region: " + regionSelec); 
         axios.get(url)
             .then(response => {
                 console.log("then");
-                const lesPays = Object.values(response.data);
+                const lesPays = Object.values(response.data).map(pays => {
+                    return {
+                        flags : pays.flags,
+                        translations : pays.translations,
+                        capital : pays.capital,
+                        region : pays.region,
+                    }
+                });
                 const nbPays = lesPays.length;
                 this.setState({
                     listePays: lesPays,
                     loading: false,
                 });
                 this.props.majNbPays(nbPays);
-                console.log(this.state);
             })
             .catch(error => {
                 console.log(error);
