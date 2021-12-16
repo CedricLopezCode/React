@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Titre from "../../Components/Titre/Titre";
 import Bouton from "../../Components/Bouton/Bouton";
 import LesPays from './LesPays/LesPays';
-import Pagination from "../../Components/Pagination/Pagination";
 
 class PaysManager extends Component{
     
@@ -12,9 +11,30 @@ class PaysManager extends Component{
         region : null,
         numPage : 1,
     }
-
+    
     render() {
-        return <>
+        const nombrePaysParPage = 10;
+        let pagination = [];
+        if(this.state.nombrePays > 0){
+            let nbPage = 0;
+            this.state.nombrePays % 10 === 0 ?
+                nbPage = this.state.nombrePays/nombrePaysParPage :
+                nbPage = (this.state.nombrePays/nombrePaysParPage)+1 ;
+
+            for(let i = 1; i <= nbPage; i++){
+                pagination.push(
+                    <Bouton key={i}
+                        typeBtn="btn-info" 
+                        clic={() => this.changPageHandle(i)}
+                        selected= {this.state.numPage === i}
+                    >
+                        {i}
+                    </Bouton>
+                );
+            }
+        }
+
+        return <div className="container">
             <Titre>Liste des Pays du Monde</Titre>
             <Bouton 
                 typeBtn="btn-info" 
@@ -69,16 +89,20 @@ class PaysManager extends Component{
             <LesPays 
                 majNbPays={this.majNbPays} 
                 region={this.state.region}
+                numPage= {this.state.numPage}
                 refresh={this.state.refresh}
             />
-            <Pagination />
-        </>;
+            <div>{pagination}</div>
+        </div>;
     }//fin render
     
     changRegionHandle = (regionSelec) => {
         console.log("change Region");
         this.refreshHandle();
-        this.setState({region: regionSelec});
+        this.setState({
+            region: regionSelec,
+            numPage : 1
+        });
         console.log(this.state.region);
     }
     boutonClique = () => {
@@ -86,6 +110,9 @@ class PaysManager extends Component{
     }
     majNbPays = (nbPays) => {
         this.setState({nombrePays: nbPays});
+    }
+    changPageHandle = (numPage) => {
+        this.setState({numPage: numPage});
     }
     refreshHandle = () => {
         this.setState((oldState) => {

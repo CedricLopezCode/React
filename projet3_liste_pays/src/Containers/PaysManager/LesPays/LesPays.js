@@ -25,13 +25,24 @@ class LesPays extends Component{
     }
 
     render() {
+        let listePaysReduite = null;
+        let listePays = null;
+        let debut = 0;
+        let fin = 0;
+        if(!this.state.loading && this.state.listePays){
+            debut = (this.props.numPage-1) * 10;
+            fin = (this.props.numPage * 10);
+            listePaysReduite = this.state.listePays.slice(debut, fin);
+            listePays = listePaysReduite.map(cePays => { 
+                return <UnPays key={cePays.name} {...cePays}/>
+            })
+        }
+        
         return <>
             {this.state.loading && <div>Cargement en cours</div>}
             {!this.state.loading && this.state.listePays &&
                 <div className="row no-gutters">
-                    {this.state.listePays.map(cePays => { 
-                        return <UnPays key={cePays.name} {...cePays}/>
-                    })}
+                    {listePays}
                 </div>
             }
         </>;
