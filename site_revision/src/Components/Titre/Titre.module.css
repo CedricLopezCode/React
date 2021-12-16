@@ -1,0 +1,7 @@
+.Titre{
+    font-family: 'Sigmar One', cursive;
+}
+.Titre:hover{
+    color: orange !important;
+}
+
