@@ -61,6 +61,7 @@ class LesPays extends Component{
                 console.log("then");
                 const lesPays = Object.values(response.data).map(pays => {
                     return {
+                        key: pays.name.common,
                         flags : pays.flags,
                         translations : pays.translations,
                         capital : pays.capital,

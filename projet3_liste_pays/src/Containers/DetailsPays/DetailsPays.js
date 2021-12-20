@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import Titre from '../../Components/Titre/Titre';
 
 class DetailsPays extends Component{
     
     state = {
-        detailsPays: [],
+        detailsPays: null,
+        stringLangues : null,
+        tabLangues : null,
         loading: false,
     }
     
@@ -14,16 +17,20 @@ class DetailsPays extends Component{
 
         let url = "https://restcountries.com/v3.1/name/";
         url += this.props.nomPays.toLowerCase();
-        console.log("detail: "); 
+        //url += "?fullText=true";
+        //console.log("requete SQL"); 
         axios.get(url)
             .then(reponse => {
                 console.log("then");
-                console.log(reponse);
+                const stringLangues = this.recupStringLangues(reponse.data[0]);
+                const tabLangues = this.recupTabLangues(reponse.data[0]);
                 this.setState({
-                    detailsPays: Object.values(reponse.data),
+                    detailsPays: reponse.data[0],
                     loading: false,
+                    ...stringLangues,
+                    ...tabLangues
                 });
-                console.log(this.state.detailsPays); 
+                console.log(this.state.detailsPays);
             })
             .catch(error => {
                 console.log("catch");
@@ -33,27 +40,74 @@ class DetailsPays extends Component{
     }
 
     render() {
-
+        console.log(this.props);
+        let pays = this.state.detailsPays;
+        console.log("pays: " + pays);
+         
         return <div className="container">
+            <Titre>Page du pays : {this.props.nomPays}</Titre>
             {this.state.loading && <div>Chargement en cours</div>}
-            {!this.state.loading && this.state.detailsPays.length>0 &&
+            {pays &&
                 <div className="row no-gutters">
-                    <div>details du Pays</div>
-                    <div>pays : {this.props.nomPays}</div>
-                    <div>state: {this.state.detailsPays[0].name.common}</div>
+                    <img className = "col-3 mt-2" alt='drapeau' src={pays.flags.svg}/>
+                    <div>Nom : {pays.translations.fra.common}</div>
+                    <div>Abrébiation : {pays.cca3}</div>
+                    <div>Capitale : {pays.capital}</div>
+                    <div>Superficie : {pays.area} km2</div>
+                    <div>Population : {pays.population} habitants</div>
+                    <div>Region : {pays.region}</div>
+                    <div>Sous-Region : {pays.subregion}</div>
+                    <div>Langue Tab: {this.state.tabLangues}</div>
+                    <div>Langue String: {this.state.stringLangues}</div>
+                     {/*    */}
                 </div>
             } 
         </div>;
-      
-        //console.log(this.props);
-        //let titi=this.state.detailsPays[10].region;
-        //console.log("lg: "+this.state.detailsPays.length);
-        //console.log("titi: "+titi);
-        //console.log("pays2: "+this.state.detailsPays[10].region);
-        //console.log("pays2: "+toto);
-      //console.log("longueur: "+this.state.detailsPays.name.length());
-
     }//fin render
+
+    recupTabLangues = (pays) => {
+        let tableauLangues = [];
+
+        for (let key in pays.languages) {
+            tableauLangues.push(pays.languages[key]);
+        }
+        //console.log(listeLangueInfos);
+
+        this.setState({tabLangues : tableauLangues});
+    }
+    recupStringLangues = (pays) => {
+        let stringLangues = " ";
+
+        for (let key in pays.languages) {
+            stringLangues += pays.languages[key] + " ,  ";
+        }
+        stringLangues = stringLangues.slice(0, -4);
+        //console.log(stringLangues);
+
+        this.setState({stringLangues : stringLangues});
+    }
+    /*recupInfosLangues = (pays) => {
+        let stringLangueInfos = " ";
+        let listeLangueInfos = [];
+        //recup liste langue sting
+
+        for (let key in pays.languages) {
+            stringLangueInfos += pays.languages[key] + " ,  ";
+        stringLangueInfos = stringLangueInfos.slice(0, -4);
+        //console.log(stringLangueInfos);
+        
+        //recup liste langue tableau
+
+        for (let key in pays.languages) {
+            listeLangueInfos.push(pays.languages[key]);
+        }
+        //console.log(listeLangueInfos);
+
+        this.setState({
+            stringLangue : stringLangueInfos,
+            listeLangue : listeLangueInfos
+        });
+    }*/
     
 }//fin DetailsPays
 

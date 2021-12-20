@@ -11,10 +11,25 @@ const navBar = (props) => {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <li className="nav-item">
-                        <NavLink to="/" exact className="nav-link">Page d'accueil Link</NavLink>
+                        <NavLink to="/" 
+                            exact 
+                            className="nav-link"
+                            activeClassName={"active activeAccueil"}
+                            activeStyle={{textDecoration:"underline"}}
+                        >
+                            Page d'accueil Link
+                        </NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink to="/pays" exact className="nav-link">Page des pays Link</NavLink>
+                        <NavLink to="/pays" 
+                            exact 
+                            className="nav-link"
+                            activeClassName={"active activePays"}
+                            activeStyle={{textDecoration:"underline"}}
+                        >
+                            Page des pays Link
+                        </NavLink>
+                        {/* exact empeche le active si pays/france  */}
                     </li>
                 </ul>
             </div>
