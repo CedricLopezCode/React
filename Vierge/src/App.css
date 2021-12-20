@@ -1,0 +1,13 @@
+.active{ /* pas besoin de l'ajouter à la navbar car déja intéfrée mais sans comportement */
+    border-bottom: 2px solid white;
+    border-right: 2px solid white;
+}
+.activeAccueil{
+    background-color: blue;
+}
+.activePays{
+    background-color: green;
+}
+body{
+    background-color: black;
+}
