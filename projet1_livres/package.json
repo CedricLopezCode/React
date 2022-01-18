@@ -1,6 +1,7 @@
 {
   "name": "projet1_livres",
   "version": "0.1.0",
+  "homepage": "https://www.cedriccode.fr/react/projet1/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.0",

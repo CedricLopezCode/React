@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "/home/cmetroid/CDA/32_React/projet0/src/ComponentsAffichage/Personne/PersonneGeneral.css";
+import "../../ComponentsAffichage/Personne/PersonneGeneral.css";
 import classes from "./HorlogeLive.module.css";
 
 class HorlogeLive extends Component{

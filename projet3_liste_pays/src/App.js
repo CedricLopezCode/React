@@ -13,7 +13,7 @@ import "./App.css";
 class App extends Component{
   render(){
     return (
-      <BrowserRouter>
+      <BrowserRouter basename="/react/projet3/">
 
         <Navbar/>
         <Switch> {/* !!! Faire attention aux pages sans exact*/}

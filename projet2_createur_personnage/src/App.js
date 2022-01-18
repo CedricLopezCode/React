@@ -14,7 +14,7 @@ class App extends Component{
     return <div className="container">
       <CreateurPersoAxios refresh={this.refreshHandle}/>
       <ListePersos refresh={this.state.refresh}/>
-      <CreateurPersonnage />
+      {/* <CreateurPersonnage /> */}
     </div>;
   }
 
